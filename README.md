@@ -33,6 +33,6 @@ The goal of this study is to develop a personalized recommendation system that i
 
 2. Content-Based Filtering: Recommend items similar to what a user has liked before.
 
-3. Hybrid Approach (Optional): Combine multiple recommendation techniques for better accuracy.
+3. Hybrid Approach: Combine multiple recommendation techniques for better accuracy.
 
-4. Performance Evaluation: Assess the effectiveness of different models using evaluation metrics such as RMSE (Root Mean Squared Error)
+4. Performance Evaluation: Assess the effectiveness of different models using evaluation metrics such as RMSE (Root Mean Squared Error) and Cosine Similarities 
