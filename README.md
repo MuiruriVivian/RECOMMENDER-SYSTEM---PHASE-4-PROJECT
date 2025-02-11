@@ -93,17 +93,15 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 **EXPLAINATION**
 According to the EDA:
 
-1. Rating
-    The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1.
+1. Rating:
 
-    The distribution is skewed towards higher ratings, with the highest frequency at Rating 4.
+    The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1. The distribution is skewed towards higher ratings, with the highest frequency at Rating 4. 
 
-    As the ratings increase from 1 to 5, the number of counts increases, showing that more movies received higher ratings.
-
-    This pattern suggests that, in this dataset, movies are more likely to receive higher ratings than lower ones.
+    As the ratings increase from 1 to 5, the number of counts increases, showing that more movies received higher ratings. This pattern suggests that, in this dataset, movies are more likely to receive higher ratings than lower ones.
 
 2. Genre:
-    Drama is the most frequent genre, with over 40,000 movies. It is followed closely by Comedy and Action, which also have large counts.
+
+    Drama is the most frequent watched genre, with over 40,000 movies. It is followed closely by Comedy and Action, which also have large counts.
 
     Genres such as Thriller, Adventure, and Romance appear in the middle range, with counts significantly lower than Drama but still in the high teens to low 20,000s.
 
@@ -116,6 +114,7 @@ According to the EDA:
     However, the basic statistics shows that the poorly rated movies are Indestructible Man,Yongary: Monster from the Deep,  Don't Look Now, Superfast! and Anaconda: The Offspring
 
 4. Rating per Genre
+
     The genres that are highly rated are Film-Noir, War, Documentary, Crime and Drama. 
 
     On the other hand, The low rated genre were Horror,Comedy, Children,Actions and Sci-Fi
