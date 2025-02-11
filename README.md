@@ -94,7 +94,7 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 According to the EDA:
 
 1. Rating
-    *The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1.
+    The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1.
 
     The distribution is skewed towards higher ratings, with the highest frequency at Rating 4.
 
@@ -103,22 +103,32 @@ According to the EDA:
     This pattern suggests that, in this dataset, movies are more likely to receive higher ratings than lower ones.
 
 2. Genre:
-Drama is the most frequent genre, with over 40,000 movies. It is followed closely by Comedy and Action, which also have large counts.
+    Drama is the most frequent genre, with over 40,000 movies. It is followed closely by Comedy and Action, which also have large counts.
 
-Genres such as Thriller, Adventure, and Romance appear in the middle range, with counts significantly lower than Drama but still in the high teens to low 20,000s.
+    Genres such as Thriller, Adventure, and Romance appear in the middle range, with counts significantly lower than Drama but still in the high teens to low 20,000s.
 
-On the other end of the spectrum, genres like Western, Documentary, and Film-Noir are much less frequent, with counts well under 5,000.
+    On the other end of the spectrum, genres like Western, Documentary, and Film-Noir are much less frequent, with counts well under 5000.
 
 3. Rating by Title
-    * The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain. 
+    
+    The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain. 
+
+    However, the basic statistics shows that the poorly rated movies are Indestructible Man,Yongary: Monster from the Deep,  Don't Look Now, Superfast! and Anaconda: The Offspring
 
 4. Rating per Genre
+    The genres that are highly rated are Film-Noir, War, Documentary, Crime and Drama. 
 
-BUILD THE RECOMMENDER SYSTEM
+    On the other hand, The low rated genre were Horror,Comedy, Children,Actions and Sci-Fi
 
-A. Collaborative Filtering Using Surprise
 
-B. Content-Based Filtering (Using Cosine Similarity)
+## BUILD THE RECOMMENDER SYSTEM
+
+### A. Collaborative Filtering Using Surprise
+
+### B. Content-Based Filtering (Using Cosine Similarity)
+
+### C. Hybrid Based Flitering
+
 
 MODEL EVALUATION
 
