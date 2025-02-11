@@ -43,27 +43,7 @@ The goal of this study is to develop a personalized recommendation system that i
 
 *  Import necessary libraries for data handling, visualization, and modeling.
 
-```python
-!pip install surprise
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import sklearn.metrics as metrics
-import warnings
-warnings.filterwarnings('ignore')
-
-from sklearn.cluster import KMeans, AgglomerativeClustering
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from surprise.prediction_algorithms import knns
-from surprise import Reader, Dataset, SVD, KNNBasic, accuracy
-from surprise.model_selection import train_test_split
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
-from surprise.model_selection import cross_validate
-```
 
     Collecting surprise
       Downloading surprise-0.1-py2.py3-none-any.whl.metadata (327 bytes)
@@ -91,25 +71,6 @@ from surprise.model_selection import cross_validate
 *   Read and explore the dataset.
 
 
-
-```python
-# upload links datasets
-links = pd.read_csv("links.csv")
-print(links.shape)
-# links.head(5)
-
-#upload movies dataset
-movies = pd.read_csv("movies.csv")
-print(movies.shape)
-# movies.head(5)
-
-# upload ratings dataset
-ratings = pd.read_csv("ratings.csv")
-print(ratings.shape)
-#ratings.head(5)
-
-```
-
     (9742, 3)
     (9742, 3)
     (100836, 4)
@@ -122,21 +83,6 @@ print(ratings.shape)
 *   Handle missing data.
 *   Remove duplicate records, if any.
 *   Clean or transform data types as necessary.
-
-
-```python
-# Merge links and movies dataset using 'movieId'
-links_movies = pd.merge(links, movies, on="movieId", how="inner")
-
-# Now merge the result with ratings using 'movieId'
-links_movies_ratings = pd.merge(links_movies, ratings, on="movieId", how="inner")
-
-# Print shapes and display the first few rows
-print(links_movies_ratings.shape)
-
-# view the dataset
-links_movies_ratings.head(5)
-```
 
     (100836, 8)
 
@@ -447,13 +393,6 @@ links_movies_ratings.head(5)
 
 
 
-```python
-# drop columns
-links_movies_ratings.drop(["imdbId", "tmdbId", "timestamp"], axis=1, inplace=True)
-links_movies_ratings.head(5)
-```
-
-
 
 
 
@@ -741,13 +680,6 @@ links_movies_ratings.head(5)
 
 
 
-```python
-# handle missing value
-links_movies_ratings.dropna(inplace=True)
-links_movies_ratings.isnull().sum()
-```
-
-
 
 
 <div>
@@ -810,19 +742,6 @@ links_movies_ratings.isnull().sum()
 
 
 
-
-
-```python
-# Extract year from movie title
-links_movies_ratings['year'] = links_movies_ratings['title'].str.extract(r'\((\d{4})\)').astype(float)
-
-# Remove the year from the title column
-links_movies_ratings['title'] = links_movies_ratings['title'].str.replace(r'\s*\(\d{4}\)', '', regex=True)
-
-# Display the updated dataframe
-links_movies_ratings.head()
-
-```
 
 
 
@@ -1120,22 +1039,6 @@ links_movies_ratings.head()
 Pipeline
 
 
-```python
-# Data Preprocessing Pipeline
-def preprocess_movies(movies_df):
-    links_movies_ratings['genres'] = links_movies_ratings['genres'].str.replace('|', ' ')
-    vectorizer = TfidfVectorizer(stop_words='english')
-    genre_matrix = vectorizer.fit_transform(links_movies_ratings['genres'])
-    return genre_matrix
-
-movies_tfidf_matrix = preprocess_movies(movies)
-print(movies_tfidf_matrix.shape)
-print(" ")
-print("There are 9742 movies in the dataset.")
-print("There are 23 unique genre-related words in the dataset (after processing).")
-```
-
-
     ---------------------------------------------------------------------------
 
     AttributeError                            Traceback (most recent call last)
@@ -1209,12 +1112,6 @@ print("There are 23 unique genre-related words in the dataset (after processing)
 
 Split and Train the Data
 
-
-```python
-# Split the dataset into training and testing set
-trainset, testset = train_test_split(data, test_size=0.25, random_state=42)
-```
-
 ## EXPLORATORY DATA ANALYSIS (EDA)
 
 *   Basic statistics.
@@ -1223,17 +1120,6 @@ trainset, testset = train_test_split(data, test_size=0.25, random_state=42)
 
 
 ###  1.Rating
-
-
-```python
-# EDA for rating: plot histogram
-plt.figure(figsize=(8, 6))
-sns.histplot(links_movies_ratings['rating'], bins=20, kde=True)
-plt.title('Distribution of Ratings')
-plt.xlabel('Rating')
-plt.ylabel('Count')
-plt.show()
-```
 
 
     
@@ -1269,37 +1155,6 @@ plt.show()
 ### 2.Genre:
 
 
-```python
-# Each movie can have multiple genres separated by '|'. We need to split them.
-
-# Create a copy of the dataframe to explode genres
-df_genre = links_movies_ratings.copy()
-# Replace '(no genres listed)' with NaN maybe
-# Split genres by '|'
-df_genre['genres'] = df_genre['genres'].fillna('')
-df_genre = df_genre.assign(genre = df_genre['genres'].str.split('\|'))
-
-
-# Explode to have one genre per row
-df_exploded = df_genre.explode('genre')
-
-# Count per genre overall
-genre_counts = df_exploded['genre'].value_counts().reset_index()
-genre_counts.columns = ['genre', 'count']
-
-# Plot genre counts
-plt.figure(figsize=(15, 8))
-sns.barplot(data=genre_counts, x='genre', y='count')
-plt.title('Counts of Movies by Genre')
-plt.xlabel('Genre')
-plt.ylabel('Count')
-plt.xticks(rotation=55)
-plt.show()
-print(" ")
-print("This means Drama is the most common genre in the dataset, followed by Comedy and Action")
-```
-
-
     
 ![png](output_21_0.png)
     
@@ -1321,20 +1176,6 @@ print("This means Drama is the most common genre in the dataset, followed by Com
 
 
 ### 3.Rating by Title
-
-
-```python
-# Rating group by title
-avg_rating_title = links_movies_ratings.groupby('title')['rating'].mean().reset_index()
-avg_rating_title = avg_rating_title.sort_values('rating', ascending=False)
-print('Average rating per title:')
-print(avg_rating_title.head(10))
-print(" ")
-print("The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain")
-print(" ")
-print(avg_rating_title.tail(10))
-print("The Least rated movies are Indestructible Man,Yongary: Monster from the Deep,  Don't Look Now, Superfast! and Anaconda: The Offspring")
-```
 
     Average rating per title:
                                                title  rating
@@ -1367,15 +1208,6 @@ print("The Least rated movies are Indestructible Man,Yongary: Monster from the D
 
 ### 4.Rating per Genre
 
-
-```python
-# calculate average rating per genre
-avg_rating_genre = df_exploded.groupby('genre')['rating'].mean().reset_index()
-avg_rating_genre = avg_rating_genre.sort_values('rating', ascending=False)
-print('Average rating per genre:')
-print(avg_rating_genre)
-```
-
     Average rating per genre:
                      genre    rating
     10           Film-Noir  3.920115
@@ -1405,28 +1237,6 @@ print(avg_rating_genre)
 
 ### A. Collaborative Filtering Using Surprise
 
-
-```python
-# Converting Data into Model-Specific Format
-# For Surprise Library (Collaborative Filtering Model):
-
-# Define the rating scale
-reader = Reader(rating_scale=(0.5, 5.0))
-
-# Load data into Surprise Dataset
-data = Dataset.load_from_df(links_movies_ratings[['userId', 'movieId', 'rating']], reader)
-
-# Load dataset into Surprise format
-reader = Reader(rating_scale=(0.5, 5.0))
-data = Dataset.load_from_df(links_movies_ratings[['userId', 'movieId', 'rating']], reader)
-
-# Train model using SVD
-model = SVD()
-# Import cross_validate from surprise.model_selection
-
-cross_validate(model, data, cv=5, verbose=True)
-```
-
     Evaluating RMSE, MAE of algorithm SVD on 5 split(s).
     
                       Fold 1  Fold 2  Fold 3  Fold 4  Fold 5  Mean    Std     
@@ -1454,50 +1264,12 @@ cross_validate(model, data, cv=5, verbose=True)
 
 
 
-
-```python
-# Train a basic SVD model on the training set
-algo = SVD(random_state=42)
-algo.fit(trainset)
-
-# Predict on the testset
-predictions = algo.test(testset)
-
-# Compute and print RMSE
-rmse = accuracy.rmse(predictions)
-
-print('RMSE on test set:', rmse)
-print('Number of predictions:', len(predictions))
-```
-
     RMSE: 0.8745
     RMSE on test set: 0.8744981021934208
     Number of predictions: 25209
 
 
 ### B. Content-Based Filtering (Using Cosine Similarity)
-
-
-```python
-# Convert movie genres into a TF-IDF matrix
-tfidf = TfidfVectorizer(stop_words="english")
-tfidf_matrix = tfidf.fit_transform(movies['genres'].fillna(""))
-
-# Compute cosine similarity
-cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
-# Function to recommend movies
-def recommend(movie_title, num_recommendations=5):
-    idx = movies[movies['title'] == movie_title].index[0]
-    scores = list(enumerate(cosine_sim[idx]))
-    scores = sorted(scores, key=lambda x: x[1], reverse=True)
-    recommended_movie_indices = [i[0] for i in scores[1:num_recommendations+1]]
-    return movies.iloc[recommended_movie_indices]['title']
-
-# Example recommendation
-recommend("Toy Story (1995)")
-
-```
 
 
     ---------------------------------------------------------------------------
@@ -1549,21 +1321,6 @@ recommend("Toy Story (1995)")
 
 ## MODEL EVALUATION
 
-
-```python
-# Define similarity options
-sim_options = {
-    'name': 'cosine',  # Use cosine similarity to measure the similarity between items
-    'user_based': False  # Set to False for item-based filtering (True would be for user-based filtering)
-}
-
-# Build the model using the KNNBasic algorithm
-item_cf_model = KNNBasic(sim_options=sim_options)
-
-# Train the model on the training set
-item_cf_model.fit(trainset)
-```
-
     Computing the cosine similarity matrix...
     Done computing similarity matrix.
 
@@ -1575,32 +1332,11 @@ item_cf_model.fit(trainset)
 
 
 
-
-```python
-trainset, testset = train_test_split(data, test_size=0.2)
-model.fit(trainset)
-predictions = model.test(testset)
-
-# Compute RMSE
-rmse = accuracy.rmse(predictions)
-print('RMSE:', rmse)
-
-```
-
     RMSE: 0.8639
     RMSE: 0.8638545783772473
 
 
 ## MAKING A PREDICTION
-
-
-```python
-sim_cosine = {"name": "cosine", "user_based": False}
-basic_cosine = knns.KNNBasic(sim_options=sim_cosine)
-basic_cosine.fit(trainset)
-predictions = basic_cosine.test(testset)
-print(accuracy.rmse(predictions))
-```
 
     Computing the cosine similarity matrix...
     Done computing similarity matrix.
@@ -1611,81 +1347,17 @@ print(accuracy.rmse(predictions))
 
 Predict ratings for a user-movie pair.
 
-
-```python
-user_id = 1
-movie_id = 9745
-predicted_rating = model.predict(user_id, movie_id)
-print(f"Predicted rating: {predicted_rating.est}")
-```
-
     Predicted rating: 4.187465617028602
 
 
-
-```python
-user_id = 1
-movie_id = 50
-predicted_rating = model.predict(user_id, movie_id)
-print(f"Predicted rating: {predicted_rating.est}")
-
-```
-
     Predicted rating: 5.0
 
-
-
-```python
-# Define movie titles
-movie_title_1 = "Avenger"
-movie_title_2 = "Ex Drummer"
-
-# Find the movie IDs for the given titles from the combined DataFrame
-movie_id_1 =links_movies_ratings[links_movies_ratings['title'].str.contains(movie_title_1, case=False, na=False)]['movieId'].values
-movie_id_2 = links_movies_ratings[links_movies_ratings['title'].str.contains(movie_title_2, case=False, na=False)]['movieId'].values
-
-# Check if the movie titles were found
-if len(movie_id_1) > 0:
-    rating_1 = links_movies_ratings[links_movies_ratings['movieId'] == movie_id_1[0]]['rating'].values[0]
-    print(f"Movie: {movie_title_1}, Rating: {rating_1}")
-else:
-    print(f"Movie '{movie_title_1}' not found.")
-
-if len(movie_id_2) > 0:
-    rating_2 = links_movies_ratings[links_movies_ratings['movieId'] == movie_id_2[0]]['rating'].values[0]
-    print(f"Movie: {movie_title_2}, Rating: {rating_2}")
-else:
-    print(f"Movie '{movie_title_2}' not found.")
-
-```
 
     Movie: Avenger, Rating: 3.0
     Movie: Ex Drummer, Rating: 5.0
 
 
 ## MAKE RECOMMENDATION BASED ON A MOVIE TITLE
-
-
-```python
-def get_similar_movies(movie_title, model, trainset, movies_df, top_n=5):
-    # Find the movie ID for the given title
-    movie_id = movies_df[movies_df['title'].str.contains(movie_title, case=False, na=False)]['movieId'].values
-
-    # Convert the movieId to an internal ID used by Surprise (trainset)
-    movie_inner_id = trainset.to_inner_iid(movie_id[0])
-
-    # Get the top N most similar movies using the KNN model's get_neighbors function
-    neighbors = model.get_neighbors(movie_inner_id, k=top_n)
-
-    # Map internal IDs back to movie titles
-    similar_titles = [(movies_df[movies_df['movieId'] == int(trainset.to_raw_iid(neighbor))]['title'].values[0])
-                      for neighbor in neighbors]
-
-    return similar_titles
-
-# Example usage
-recommend("Toy Story", 5)
-```
 
 
 
@@ -1738,23 +1410,6 @@ recommend("Toy Story", 5)
 
 
 
-
-```python
-# Movie title input
-movie_title = "Shooter"
-
-# Get the top 5 similar movies
-recommended_movies = get_similar_movies(movie_title, item_cf_model, trainset, links_movies_ratings, top_n=5)
-
-# Print the recommended movies (only titles)
-if isinstance(recommended_movies, list):
-    print(f"Top 5 similar movies to '{movie_title}':")
-    for movie in recommended_movies:
-        print(movie)
-else:
-    print(recommended_movies)
-```
-
     Top 5 similar movies to 'Shooter':
     Sum of All Fears, The (2002)
     Working Girl (1988)
@@ -1762,24 +1417,6 @@ else:
     Enough (2002)
     Mothman Prophecies, The (2002)
 
-
-
-```python
-# Movie title input
-movie_title = "Hollywood Chainsaw Hookers"
-
-# Get the top 5 similar movies
-recommended_movies = get_similar_movies(movie_title, item_cf_model, trainset, links_movies_ratings, top_n=5)
-
-# Print the recommended movies (only titles)
-if isinstance(recommended_movies, list):
-    print(f"Top 5 similar movies to '{movie_title}':")
-    for movie in recommended_movies:
-        print(movie)
-else:
-    print(recommended_movies)
-
-```
 
     Top 5 similar movies to 'Hollywood Chainsaw Hookers':
     Ferris Bueller's Day Off (1986)
@@ -1792,24 +1429,6 @@ else:
 ## MAKE RECOMMENDATION BASED ON GENRE
 
 Explode Genres and Count Views per Genre
-
-
-```python
-# Split genres into separate rows
-movies['genres'] = movies['genres'].str.split('|')
-movies_exploded = movies.explode('genres')
-
-# Merge ratings with movies dataset
-user_genre_data = ratings.merge(movies_exploded, on="movieId")
-
-# Count number of times each user has watched a genre
-user_genre_counts = user_genre_data.groupby(['userId', 'genres']).size().reset_index(name="count")
-
-# Display the first few rows
-print("This table shows how many times each user watched a specific genre.")
-print(" ")
-user_genre_counts.head()
-```
 
     This table shows how many times each user watched a specific genre.
      
@@ -2090,17 +1709,6 @@ user_genre_counts.head()
 
 
 
-
-```python
-# Find the most-watched genre for each user
-favorite_genres = user_genre_counts.loc[user_genre_counts.groupby('userId')['count'].idxmax()]
-
-# Display a few users and their favorite genres
-print("This finds the genre each user watches the most")
-print(" ")
-favorite_genres.head()
-```
-
     This finds the genre each user watches the most
      
 
@@ -2379,31 +1987,6 @@ favorite_genres.head()
 
 
 
-
-
-```python
-def recommend_by_genre(user_id, num_recommendations=5):
-    # Get user's favorite genre
-    fav_genre = favorite_genres.loc[favorite_genres['userId'] == user_id, 'genres'].values[0]
-
-    # Find movies that belong to this genre
-    recommended_movies = movies_exploded[movies_exploded['genres'] == fav_genre]
-
-    # Sort by average rating (or another metric)
-    # Ensure 'movieId' is treated as numeric before merging
-    recommended_movies['movieId'] = pd.to_numeric(recommended_movies['movieId'])
-    top_movies = recommended_movies.merge(ratings, on='movieId').groupby(['movieId', 'title'])['rating'].mean().reset_index()
-
-    # Sort and get top recommendations
-    top_movies = top_movies.sort_values(by='rating', ascending=False)
-
-    return top_movies[['title', 'rating']].head(num_recommendations)
-
-# Example usage:
-print("This function finds movies that match the user's preferred genre and recommends the top-rated ones.")
-print(" ")
-recommend_by_genre(1, 5)  # Recommend 5 movies for user 1
-```
 
     This function finds movies that match the user's preferred genre and recommends the top-rated ones.
      
