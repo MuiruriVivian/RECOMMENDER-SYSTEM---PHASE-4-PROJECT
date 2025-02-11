@@ -37,9 +37,28 @@ The goal of this study is to develop a personalized recommendation system that i
 
 4. Performance Evaluation: Assess the effectiveness of different models using evaluation metrics such as RMSE (Root Mean Squared Error) and Cosine Similarities 
 
-IMPORTING THE NECESSARY LIBRARIES
+## IMPORTING THE NECESSARY LIBRARIES
 
 Import necessary libraries for data handling, visualization, and modeling.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import sklearn.metrics as metrics
+import warnings
+warnings.filterwarnings('ignore')
+
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from surprise.prediction_algorithms import knns
+from surprise import Reader, Dataset, SVD, KNNBasic, accuracy
+from surprise.model_selection import train_test_split
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+from surprise.model_selection import cross_validate
+
 
 LOADING THE DATASET
 
