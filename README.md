@@ -1,6 +1,9 @@
 # BUILDING A PERSONALIZED MOVIE RECOMMENDATION SYSTEM
 ---
 COLLABORATIVE AND CONTENT-BASED FILTERING 
+
+![Sample Image](AAAAQRC29H19twWKcTZ9Zpg4biJbGNaHF2GGIYNcLt4eZ6fvwugUJbuKxTjjMFPCS-y5P3ZePL57rupDtSkyUIJhv3P8leMJGMzszuG2CHNd65NwWPu5LeKxQkRNfNMHmxAwt7tmQZFk1VIrBd1aXr2AR5DM.jpg)
+
 ## BUSINESS PROBLEM:
 ---
 
@@ -39,75 +42,67 @@ The goal of this study is to develop a personalized recommendation system that i
 
 ## IMPORTING THE NECESSARY LIBRARIES
 
-Import necessary libraries for data handling, visualization, and modeling.
+Import necessary libraries for data handling, visualization, and modeling. The imported packages are:
+1. pandas
+2. matplotlib
+3. seaborn
+4. numpy
+5. sklearn
+6. warnings
+7. suprise
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import sklearn.metrics as metrics
-import warnings
-warnings.filterwarnings('ignore')
+## LOADING THE DATASET
 
-from sklearn.cluster import KMeans, AgglomerativeClustering
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from surprise.prediction_algorithms import knns
-from surprise import Reader, Dataset, SVD, KNNBasic, accuracy
-from surprise.model_selection import train_test_split
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
-from surprise.model_selection import cross_validate
+* This is Loading the necessary datasets (e.g., user-item interactions, item metadata).
+
+* The Data used was **MovieLens Latest Datasets** which was extracted from https://grouplens.org/datasets/movielens/latest/. 
+
+* The data consist of 100,000 ratings and 3,600 tag applications applied to 9,000 movies by 600 users.
+
+* The Dataset has links, movies and rating data that was merged as one dataset. 
+
+## DATA CLEANING
+
+* Inspect and clean the data which will be done as follows:
+
+    1. Merging the Datasets
+
+    2. Drop the irrelevant columns
+
+    3. Handle missing data.
+
+    4. Remove duplicate records
+
+    5. Clean or transform data types as necessary.
+
+## PRE-PROCESSING AND FEATURE ENGINEERING
+
+* This was conducted in order to transform raw data into a structured format suitable for machine learning models.
+
+    1. Extracting year from movie titles.
+
+    2. Converting Data into Model-Specific Format
+
+    3. Splitting Data for Training & Testing
+
+## EXPLORATORY DATA ANALYSIS (EDA)
+
+* Exploratory data analysis (EDA) was performed to understand the distributions, correlations, and patterns.
 
 
-LOADING THE DATASET
-
-Read and explore the dataset.
-
-DATA CLEANING
-
-Merging the Datasets
-
-Drop the irrelevant columns
-
-Handle missing data.
-
-Remove duplicate records, if any.
-
-Clean or transform data types as necessary.
-
-DATA PREPROCESSING
-
-This is conducted in order to transform raw data into a structured format suitable for machine learning models.
-
-Extracting year from movie titles.
-
-Converting Data into Model-Specific Format
-
-Splitting Data for Training & Testing
-
-EXPLORATORY DATA ANALYSIS (EDA)
-
-Basic statistics.
-
-Data visualization.
+**EXPLAINATION**
+According to the EDA:
 
 1. Rating
+    *The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1.
 
-EXPLANATION
+    The distribution is skewed towards higher ratings, with the highest frequency at Rating 4.
 
-The histogram shows that the majority of the movies are rated 4 while very few had a rating of 1.
+    As the ratings increase from 1 to 5, the number of counts increases, showing that more movies received higher ratings.
 
-The distribution is skewed towards higher ratings, with the highest frequency at Rating 4.
-
-As the ratings increase from 1 to 5, the number of counts increases, showing that more movies received higher ratings.
-
-This pattern suggests that, in this dataset, movies are more likely to receive higher ratings than lower ones.
+    This pattern suggests that, in this dataset, movies are more likely to receive higher ratings than lower ones.
 
 2. Genre:
-
-EXPLANATION
-
 Drama is the most frequent genre, with over 40,000 movies. It is followed closely by Comedy and Action, which also have large counts.
 
 Genres such as Thriller, Adventure, and Romance appear in the middle range, with counts significantly lower than Drama but still in the high teens to low 20,000s.
@@ -115,6 +110,7 @@ Genres such as Thriller, Adventure, and Romance appear in the middle range, with
 On the other end of the spectrum, genres like Western, Documentary, and Film-Noir are much less frequent, with counts well under 5,000.
 
 3. Rating by Title
+    * The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain. 
 
 4. Rating per Genre
 

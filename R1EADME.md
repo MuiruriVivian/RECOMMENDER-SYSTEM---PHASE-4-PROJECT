@@ -124,21 +124,7 @@ print(ratings.shape)
 *   Clean or transform data types as necessary.
 
 
-```python
-# Merge links and movies dataset using 'movieId'
-links_movies = pd.merge(links, movies, on="movieId", how="inner")
 
-# Now merge the result with ratings using 'movieId'
-links_movies_ratings = pd.merge(links_movies, ratings, on="movieId", how="inner")
-
-# Print shapes and display the first few rows
-print(links_movies_ratings.shape)
-
-# view the dataset
-links_movies_ratings.head(5)
-```
-
-    (100836, 8)
 
 
 
