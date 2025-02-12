@@ -2,7 +2,8 @@
 ---
 COLLABORATIVE AND CONTENT-BASED FILTERING 
 
-![Sample Image](AAAAQRC29H19twWKcTZ9Zpg4biJbGNaHF2GGIYNcLt4eZ6fvwugUJbuKxTjjMFPCS-y5P3ZePL57rupDtSkyUIJhv3P8leMJGMzszuG2CHNd65NwWPu5LeKxQkRNfNMHmxAwt7tmQZFk1VIrBd1aXr2AR5DM.jpg)
+![My Logo](../movies.jpg)
+
 
 ## BUSINESS PROBLEM:
 ---
@@ -88,8 +89,14 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 ## EXPLORATORY DATA ANALYSIS (EDA)
 
 * Exploratory data analysis (EDA) was performed to understand the distributions, correlations, and patterns.
-* 
+
     **Visuals**
+
+![Sample Image](Rating Distribution.png)
+
+
+![Sample Image](Genre Distribution.png)
+
 
 **EXPLAINATION**
 According to the EDA:
