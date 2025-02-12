@@ -171,7 +171,8 @@ user-based collaborative filtering
 - In user-based collaborative filtering, the system recommends movies based on the preferences of users who have similar tastes. It identifies users with similar rating patterns and suggests movies that those users have liked but the target user hasn't seen yet.
 
 - For example, if a user highly rated "Hollywood Chainsaw Hookers", the system will look for other users who also liked this movie. If those users also rated "Calcium Kid" and "Chinese Puzzle" highly, then these movies will be recommended to the target user.
-
+  
+---
 ### Content Based Filtering 
 ---
 
@@ -196,14 +197,14 @@ The Features used were:
 
 - However, an RMSE close to 1 suggests that while the model performs reasonably well, there is still room for improvement through hyperparameter tuning, incorporating additional features, or using a more advanced recommendation techniqu
 
-## Making a Prediction 
+## 📌 Making a Prediction 
 ---
 
 - The performance is evaluated using Root Mean Squared Error (RMSE), which measures the difference between predicted and actual ratings. 
 
 - The resulting RMSE is 0.9734, indicating that, on average, the model's predictions deviate from actual ratings by approximately 0.97 rating points.
 
-## Summary 
+## 📌Summary 
 ---
 The notebook focuses on developing a personalized movie recommendation system using both collaborative and content-based filtering approaches
 
@@ -227,8 +228,9 @@ Implementation of two recommendation approaches:
 
 * Content-Based Filtering: Based on movie content similarity
 
+---
 
-## Conclusion 
+## 📌 Conclusion 
 ---
 The analysis revealed several important findings:
 
@@ -240,7 +242,8 @@ The analysis revealed several important findings:
 
 * The models show promise in capturing user preferences and suggesting relevant content
 
-## Recommendation 
+---
+## 📌 Recommendation 
 ---
 1. Hybrid System Implementation
 
@@ -285,3 +288,9 @@ Model Optimization
   * Optimization of recommendation algorithms
 
   * Implementation of real-time recommendation updates
+
+---
+
+Contacts
+        Github: https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT
+
