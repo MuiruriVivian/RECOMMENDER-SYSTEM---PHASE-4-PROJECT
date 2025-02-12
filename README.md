@@ -5,7 +5,7 @@ COLLABORATIVE AND CONTENT-BASED FILTERING
 ![Alt text](movies.jpg)
 
 
-## BUSINESS PROBLEM:
+## 📌BUSINESS PROBLEM:
 ---
 
 
@@ -14,7 +14,7 @@ In today's digital world, users are overwhelmed with vast amounts of content, wh
 
 For example, in an online movie streaming platform, users need relevant and personalized movie recommendations based on their viewing history and preferences. A poor recommendation system may result in users struggling to find interesting content, leading to lower customer satisfaction and reduced subscription retention.
 
-## OBJECTIVES 
+## 📌 OBJECTIVES 
 ---
 
 
@@ -28,7 +28,7 @@ By implementing an effective recommender system, businesses can:
 
 
 
-## GOALS
+## 📌 GOALS
 ---
 
 The goal of this study is to develop a personalized recommendation system that improves user experience and engagement by suggesting relevant content based on past interactions. This will be achieved using:
@@ -41,7 +41,8 @@ The goal of this study is to develop a personalized recommendation system that i
 
 4. Performance Evaluation: Assess the effectiveness of different models using evaluation metrics such as RMSE (Root Mean Squared Error) and Cosine Similarities 
 
-## IMPORTING THE NECESSARY LIBRARIES
+## 📌IMPORTING THE NECESSARY LIBRARIES
+---
 
 Import necessary libraries for data handling, visualization, and modeling. The imported packages are:
 1. pandas
@@ -52,7 +53,8 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 6. warnings
 7. suprise
 
-## LOADING THE DATASET
+## 📌 LOADING THE DATASET
+---
 
 * This is Loading the necessary datasets (e.g., user-item interactions, item metadata).
 
@@ -62,7 +64,8 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
 * The Dataset has links, movies and rating data that was merged as one dataset. 
 
-## DATA CLEANING
+## 📌 DATA CLEANING
+---
 
 * Inspect and clean the data which will be done as follows:
 
@@ -78,7 +81,8 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
 * After cleaning the dataset has 100836 rows and 6 Columns where the relevant columns are **movieId**, **title**, **genre**, **userId** and **Rating**. 
 
-## PRE-PROCESSING AND FEATURE ENGINEERING
+## 📌PRE-PROCESSING AND FEATURE ENGINEERING
+---
 
 * This was conducted in order to transform raw data into a structured format suitable for machine learning models.
 
@@ -88,14 +92,24 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
     3. Splitting Data for Training & Testing
 
-## EXPLORATORY DATA ANALYSIS (EDA)
+## 📌EXPLORATORY DATA ANALYSIS (EDA)
+---
 
 * Exploratory data analysis (EDA) was performed to understand the distributions, correlations, and patterns.
 
+---
+
+**Visualization**
+
+Genre Distribution
+
 ![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Genre%20Distribution.jpg)
+
+Rating Distribution
 
 ![Rating_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
 
+---
 
 **EXPLAINATION**
 According to the EDA:
@@ -112,15 +126,11 @@ According to the EDA:
 
     Genres such as Thriller, Adventure, and Romance appear in the middle range, with counts significantly lower than Drama but still in the high teens to low 20,000s.
 
-    On the other end of the spectrum, genres like Western, Documentary, and Film-Noir are much less frequent, with counts well under 5000.
-
 3. Rating by Title
     
     The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain.  In the recommender system, these movies likely had a significant influence on recommendations, especially in collaborative filtering models.
 
     However, if the system relies on content-based filtering, recommendations will be influenced by the features (such as genres or plot similarities) rather than just the number of ratings.
-
-    However, the basic statistics shows that the poorly rated movies are Indestructible Man,Yongary: Monster from the Deep,  Don't Look Now, Superfast! and Anaconda: The Offspring
 
 4. Rating per Genre
 
@@ -133,23 +143,144 @@ According to the EDA:
     On the other hand, The low rated genre were Horror,Comedy, Children,Actions and Sci-Fi
 
 
-## BUILD THE RECOMMENDER SYSTEM
+## 📌 BUILD THE RECOMMENDER SYSTEM
+---
 
-### A. Collaborative Filtering Using Surprise
+### Collaborative Filtering
+---
 
-### B. Content-Based Filtering (Using Cosine Similarity)
+Recommendation model is Build using **item-based collaborative filtering** and **user-based collaborative filtering**. This approach recommends items (movies) and users based on the similarities between them.
 
-### C. Hybrid Based Flitering
+The Features used were:
+
+- **Collaborative Filtering** using SVD  
+- **TF-IDF Vectorization** for genre-based recommendations  
+- **RMSE Evaluation** for performance measurement  
+- **Predicts User Ratings** for unseen movies  
+- **Top-N Movie Recommendations** for users  
+
+item-based collaborative filtering:
+
+- In item-based collaborative filtering, the system recommends items that are similar to the ones the user has already liked.
+
+- For example, the highly rated movie is "Hollywood Chainsaw Hookers" thus the system will recommend movies that other users who liked "Hollywood Chainsaw Hookers" also enjoyed.
+
+user-based collaborative filtering
+
+- In user-based collaborative filtering, the system recommends movies based on the preferences of users who have similar tastes. It identifies users with similar rating patterns and suggests movies that those users have liked but the target user hasn't seen yet.
+
+- For example, if a user highly rated "Hollywood Chainsaw Hookers", the system will look for other users who also liked this movie. If those users also rated "Calcium Kid" and "Chinese Puzzle" highly, then these movies will be recommended to the target user.
+
+### Content Based Filtering 
+---
+
+ Content-Based Movie Recommender System suggests movies based on their features such as genres, descriptions, and other metadata. The system utilizes TF-IDF vectorization and cosine similarity to find movies similar to a given input movie.
+
+The Features used were:
+
+- Content-Based Filtering: Recommends movies based on their similarity in genres and descriptions.
+
+- TF-IDF Vectorization: Converts textual movie data into numerical form.
+
+- Cosine Similarity: Measures the similarity between movies based on their features.
+
+- Customizable Recommendations: Users can input a movie name to get personalized recommendations.
+
+## 📌 Model Evaluation
+---
+
+- The model achieved an RMSE of 0.8748, meaning the predicted ratings deviate from the actual ratings by approximately 0.87 on average. 
+
+- Since RMSE is a measure of error, a lower value indicates better prediction accuracy. 
+
+- However, an RMSE close to 1 suggests that while the model performs reasonably well, there is still room for improvement through hyperparameter tuning, incorporating additional features, or using a more advanced recommendation techniqu
+
+## Making a Prediction 
+---
+
+- The performance is evaluated using Root Mean Squared Error (RMSE), which measures the difference between predicted and actual ratings. 
+
+- The resulting RMSE is 0.9734, indicating that, on average, the model's predictions deviate from actual ratings by approximately 0.97 rating points.
+
+## Summary 
+---
+The notebook focuses on developing a personalized movie recommendation system using both collaborative and content-based filtering approaches
+
+Key objectives include:
+
+* Increasing user engagement and retention
+
+* Improving customer satisfaction through personalization
+
+* Enhancing revenue opportunities via targeted marketing
+
+The methodology involves:
+
+* Data cleaning and preprocessing of movie, rating, and link information
+
+* Exploratory Data Analysis (EDA) of rating distributions and genre information
+
+Implementation of two recommendation approaches:
+
+* Collaborative Filtering: Based on user similarity patterns
+
+* Content-Based Filtering: Based on movie content similarity
 
 
-MODEL EVALUATION
+## Conclusion 
+---
+The analysis revealed several important findings:
 
-MAKING A PREDICTION
+* Rating distribution shows a positive skew, with most movies receiving 4-5 star ratings
 
-Predict ratings for a user-movie pair.
+* Both collaborative and content-based filtering methods demonstrated effectiveness in generating recommendations
 
-MAKE RECOMMENDATION BASED ON A MOVIE TITLE
+* The combination of both approaches provides a more robust recommendation system
 
-MAKE RECOMMENDATION BASED ON GENRE
+* The models show promise in capturing user preferences and suggesting relevant content
 
-Explode Genres and Count Views per Genre
+## Recommendation 
+---
+1. Hybrid System Implementation
+
+  *   Combine collaborative and content-based filtering 
+
+  *   Leverage the strengths of both methods for more accurate recommendations
+Model Optimization
+
+2. Implement continuous monitoring of model performance
+
+  *   Regular updates to adapt to changing user preferences
+
+  *   Consider implementing A/B testing for different recommendation strategies
+
+3. Data Enhancement
+
+  * Regular updates to adapt to changing user preferences
+
+  * Expand the dataset with additional features:
+
+    * User demographics
+
+    * Movie reviews
+
+    * Social media interactions
+
+  * This will improve recommendation accuracy and personalization
+
+
+4. User Engagement Strategy
+
+  * Use personalized recommendations to increase platform engagement
+
+  * Implement features to encourage content exploration
+
+  * Track and analyze user interaction with recommendations
+
+5. Technical Improvements
+
+  * Regular system performance monitoring
+
+  * Optimization of recommendation algorithms
+
+  * Implementation of real-time recommendation updates
