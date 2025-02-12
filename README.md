@@ -92,8 +92,7 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
 * Exploratory data analysis (EDA) was performed to understand the distributions, correlations, and patterns.
 
-![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
-
+![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Genre%20Distribution.jpg)
 
 ![Rating_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
 
