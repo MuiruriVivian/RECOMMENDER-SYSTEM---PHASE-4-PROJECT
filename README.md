@@ -95,8 +95,7 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 ![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
 
 
-
-![Rating_Distribution](Rating_Distribution.jpg)
+![Rating_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
 
 
 **EXPLAINATION**
