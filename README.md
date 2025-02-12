@@ -2,7 +2,7 @@
 ---
 COLLABORATIVE AND CONTENT-BASED FILTERING 
 
-![Alt text](movies.jpg)
+![Movies](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/image/movies.jpg) 
 
 
 
@@ -104,11 +104,11 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
 Genre Distribution
 
-![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Genre%20Distribution.jpg)
+![Genre_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/image/Genre%20Distribution.jpg)
 
 Rating Distribution
 
-![Rating_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/Rating%20Distribution.jpg)
+![Rating_Distribution](https://github.com/MuiruriVivian/RECOMMENDER-SYSTEM---PHASE-4-PROJECT/blob/main/image/Rating%20Distribution.jpg)
 
 ---
 
