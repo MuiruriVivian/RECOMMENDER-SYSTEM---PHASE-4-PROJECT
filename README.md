@@ -2,7 +2,7 @@
 ---
 COLLABORATIVE AND CONTENT-BASED FILTERING 
 
-![My Logo](../movies.jpg)
+![Logo](.data/movies.jpg)
 
 
 ## BUSINESS PROBLEM:
