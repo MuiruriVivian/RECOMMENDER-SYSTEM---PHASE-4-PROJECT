@@ -94,10 +94,11 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
     **Visuals**
 
-![Alt text](Genre Distribution.png)
+
+![Alt text](Genre_Distribution.jpg)
 
 
-![Alt text](Rating Distribution.png)
+![Alt text](Rating_Distribution.jpg)
 
 
 **EXPLAINATION**
