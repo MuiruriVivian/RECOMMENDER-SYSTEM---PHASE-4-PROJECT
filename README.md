@@ -2,7 +2,7 @@
 ---
 COLLABORATIVE AND CONTENT-BASED FILTERING 
 
-![Logo](.data/movies.jpg)
+![Alt text](movies.jpg)
 
 
 ## BUSINESS PROBLEM:
@@ -37,7 +37,7 @@ The goal of this study is to develop a personalized recommendation system that i
 
 2. Content-Based Filtering: Recommend items similar to what a user has liked before.
 
-3. Hybrid Approach: Combine multiple recommendation techniques for better accuracy.
+3. Create a model and carry out a model evaluation
 
 4. Performance Evaluation: Assess the effectiveness of different models using evaluation metrics such as RMSE (Root Mean Squared Error) and Cosine Similarities 
 
@@ -76,6 +76,8 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
     5. Clean or transform data types as necessary.
 
+* After cleaning the dataset has 100836 rows and 6 Columns where the relevant columns are **movieId**, **title**, **genre**, **userId** and **Rating**. 
+
 ## PRE-PROCESSING AND FEATURE ENGINEERING
 
 * This was conducted in order to transform raw data into a structured format suitable for machine learning models.
@@ -92,10 +94,10 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 
     **Visuals**
 
-![Sample Image](Rating Distribution.png)
+![Alt text](Genre Distribution.png)
 
 
-![Sample Image](Genre Distribution.png)
+![Alt text](Rating Distribution.png)
 
 
 **EXPLAINATION**
@@ -117,13 +119,19 @@ According to the EDA:
 
 3. Rating by Title
     
-    The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain. 
+    The top 5 Most rated movies are Hollywood Chainsaw Hookers, Calcium Kid,Chinese Puzzle (Casse-tête chinois), Raise Your Voice and Rain.  In the recommender system, these movies likely had a significant influence on recommendations, especially in collaborative filtering models.
+
+    However, if the system relies on content-based filtering, recommendations will be influenced by the features (such as genres or plot similarities) rather than just the number of ratings.
 
     However, the basic statistics shows that the poorly rated movies are Indestructible Man,Yongary: Monster from the Deep,  Don't Look Now, Superfast! and Anaconda: The Offspring
 
 4. Rating per Genre
 
     The genres that are highly rated are Film-Noir, War, Documentary, Crime and Drama. 
+    
+    If many users have highly rated movies from these genres, the system will likely recommend similar genres to users with matching preferences. 
+
+    Users who have rated movies in these genres highly will receive recommendations for other films within the same genres, based on similarities in user rating patterns.
 
     On the other hand, The low rated genre were Horror,Comedy, Children,Actions and Sci-Fi
 
