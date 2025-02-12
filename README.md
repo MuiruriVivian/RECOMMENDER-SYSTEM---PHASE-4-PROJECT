@@ -88,7 +88,8 @@ Import necessary libraries for data handling, visualization, and modeling. The i
 ## EXPLORATORY DATA ANALYSIS (EDA)
 
 * Exploratory data analysis (EDA) was performed to understand the distributions, correlations, and patterns.
-
+* 
+    **Visuals**
 
 **EXPLAINATION**
 According to the EDA:
